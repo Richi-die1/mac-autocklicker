@@ -1,142 +1,136 @@
-Klar – hier ist dein **erweitertes, direkt GitHub‑fertiges `README.md`**, in dem jetzt auch die `.app`‑Download‑Option und der bekannte Icon‑Bug dokumentiert sind. Du kannst den folgenden Inhalt so übernehmen:
-
-```markdown
 # 🖱️ Mac Autoclicker – PyQt6 & Quartz
 
-Ein funktionsreicher, macOS‑spezifischer Auto‑Clicker mit moderner PyQt6‑Oberfläche.  
-Ermöglicht präzises automatisches Klicken (Single oder Double) mit einstellbarem Intervall, Maustaste, Anzahl und zufälligem Zeit‑Jitter.
+A feature-rich, macOS‑specific auto‑clicker with a modern PyQt6 interface.  
+Provides precise automated clicking (single or double) with configurable interval, mouse button, click count, and random time jitter.
 
 ---
 
 ## ✨ Features
 
-- **Cross‑Thread Architektur**: Klicklogik läuft in einem separaten `QThread` – UI bleibt responsiv.
-- **Präzise Steuerung**:
-  - Intervall von **1 ms bis 1 h**
-  - **Single‑ oder Double‑Klicks**
-  - **Links/Rechts/Mittlere Maustaste**
-  - **Feste Klickanzahl** oder **unendlich**
-- **Zufalls‑Jitter (ms)** zur realistischeren Klick‑Simulation
-- **3‑Sekunden‑Countdown** vor Start zum Schutz vor versehentlichem Aktivieren
-- **Einstellungen speichern** (JSON im User‑Library‑Verzeichnis)
-- **Moderner UI‑Look** mit Qt Fusion Theme
-- **Nur macOS**: nutzt AppKit & Quartz APIs für native Event‑Erzeugung
+- **Cross‑thread architecture**: Clicking logic runs in a separate `QThread` – UI remains responsive.
+- **Precise control**:
+  - Interval from **1 ms to 1 h**
+  - **Single** or **Double** clicks
+  - **Left / Right / Middle mouse button**
+  - **Fixed click count** or **infinite**
+- **Random jitter (ms)** for more natural click simulation
+- **3‑second countdown** before starting to prevent accidental activation
+- **Save settings** (JSON in user's Library folder)
+- **Modern UI look** with Qt Fusion theme
+- **macOS only**: uses AppKit & Quartz APIs for native event generation
 
 ---
 
-## 📦 Voraussetzungen
+## 📦 Requirements
 
-- **macOS** (Zugriff auf Bedienungshilfen muss gewährt werden)
-- **Python 3.9+** (empfohlen, nur für die „selbst kompilieren“-Variante)
-- Abhängigkeiten (für manuellen Start):
+- **macOS** (must grant Accessibility access)
+- **Python 3.9+** (recommended, only for "build yourself" option)
+- Dependencies (for manual run):
   ```bash
   pip install PyQt6 pyobjc
   ```
-- **Bedienungshilfen aktivieren**:  
-  `Systemeinstellungen` → `Sicherheit` → `Bedienungshilfen` → App hinzufügen & erlauben.
+- **Enable Accessibility**:  
+  `System Settings` → `Privacy & Security` → `Accessibility` → add the app and allow.
 
 ---
 
-## 🚀 Installation & Nutzung
+## 🚀 Installation & Usage
 
-### 1. Fertige `.app` herunterladen
-- Gehe zum **[Releases](../../releases)**‑Bereich auf GitHub.
-- Lade die neueste `.app`‑Datei herunter.
-- Verschiebe sie in deinen Programme‑Ordner.
-- Beim ersten Start ggf. in `Systemeinstellungen` → `Sicherheit` die Ausführung erlauben.
+### 1. Download ready‑to‑use `.app`
+- Go to the **[Releases](../../releases)** section on GitHub.
+- Download the latest `.app` file.
+- Move it to your Applications folder.
+- On first launch, you may need to allow execution in `System Settings` → `Privacy & Security`.
 
-### 2. Selbst kompilieren (für Entwickler)
+### 2. Build yourself (for developers)
 ```bash
-# Repo klonen
-git clone https://github.com/DEINUSERNAME/mac-autoclicker.git
+# Clone the repo
+git clone https://github.com/YOURUSERNAME/mac-autoclicker.git
 cd mac-autoclicker
 
-# Abhängigkeiten installieren
+# Install dependencies
 pip install -r requirements.txt
 
-# App mit py2app oder pyinstaller bauen
-python setup.py py2app  # oder pyinstaller main.py --onefile --windowed
+# Build the .app using py2app or pyinstaller
+python setup.py py2app  # or: pyinstaller main.py --onefile --windowed
 ```
 
-> ⚠️ **Bekannter Bug:** Beim Kompilieren wird aktuell statt des Custom‑Icons das Standard‑Python‑2‑Icon angezeigt. Funktionalität ist nicht beeinträchtigt – nur die Optik.  
-> Workaround: `.icns`‑Datei manuell im `.app`‑Bundle ersetzen, bis Bug behoben ist.
+> ⚠️ **Known Bug:** When building, the resulting `.app` currently shows the default Python 2 icon instead of the custom icon.  
+> Functionality is unaffected – it's purely cosmetic.  
+> **Workaround:** Manually replace the `.icns` file inside the `.app` bundle until the bug is fixed.
 
 ---
 
-## 🖥️ Bedienung
+## 🖥️ How to Use
 
-1. **Intervall einstellen** – Sekunden zwischen Klicks (z. B. `0.05` für 20 CPS).
-2. **Jitter (ms)** – Zufällige Zeitabweichung pro Klick.
-3. **CPS‑Anzeige** – Zeigt Klicks pro Sekunde basierend auf Intervall.
-4. **Maustaste & Klick‑Typ** auswählen.
-5. **Anzahl der Klicks** – `-1` = unendlich, oder beliebige feste Zahl.
-6. **Start** – Button klicken. Countdown läuft, danach startet der Auto‑Clicker.
-7. **Stop** – Jederzeit beenden.
+1. **Set the interval** – seconds between clicks (e.g., `0.05` for 20 CPS).
+2. **Jitter (ms)** – random variation applied to the interval per click.
+3. **CPS label** – shows clicks per second based on the interval.
+4. **Select mouse button** and **click type**.
+5. **Set click count** – `-1` = infinite, or any fixed number.
+6. **Start** – press the button, countdown runs, then clicking starts.
+7. **Stop** – press the button to end clicking.
 
-> 💡 Tipp: „Unendlich“‑Button setzt Klickanzahl direkt auf `-1`.
+> 💡 Tip: The **"Infinite"** button sets click count to `-1` instantly.
 
 ---
 
-## ⚙️ Technische Details
+## ⚙️ Technical Details
 
-### Architektur
-- **GUI**: `AutoClickerWindow` (PyQt6) – steuert Eingaben, Countdown, Thread‑Start/-Stopp, Persistenz.
-- **Worker Thread**: `ClickerThread` – erzeugt macOS‑native MouseDown/MouseUp Events via Quartz:
+### Architecture
+- **GUI**: `AutoClickerWindow` (PyQt6) – handles input, countdown, starting/stopping the thread, and settings persistence.
+- **Worker thread**: `ClickerThread` – generates macOS native MouseDown/MouseUp events via Quartz:
   - `CGEventCreateMouseEvent`
   - `CGEventPost` (`kCGHIDEventTap`)
-- **Timing**: `time.perf_counter()` für präzises Scheduling und Drift‑Vermeidung.
-- **Persistenz**: JSON‑Datei im Pfad:
+- **Timing**: `time.perf_counter()` for precise scheduling and drift prevention.
+- **Persistence**: JSON file stored at:
   ```
   ~/Library/Application Support/MacAutoclicker/settings.json
   ```
 
-### Event‑Mapping
-| GUI‑Einstellung | Quartz Events                           |
-|-----------------|----------------------------------------|
-| Links           | `kCGEventLeftMouseDown` / `Up`          |
-| Rechts          | `kCGEventRightMouseDown` / `Up`         |
-| Mitte           | `kCGEventOtherMouseDown` / `Up`         |
+### Event Mapping
+| GUI Option | Quartz Events                  |
+|------------|---------------------------------|
+| Left       | `kCGEventLeftMouseDown` / `Up`  |
+| Right      | `kCGEventRightMouseDown` / `Up` |
+| Middle     | `kCGEventOtherMouseDown` / `Up` |
 
 ---
 
-## 📂 Projektstruktur
+## 📂 Project Structure
 
 ```
 mac-autoclicker/
-├── main.py                # Hauptprogramm (GUI + Thread)
-├── requirements.txt       # Python-Abhängigkeiten
-├── setup.py               # Build-Skript für py2app/pyinstaller
-├── README.md              # Diese Datei
-└── icons/                 # Custom Icon (.icns)
+├── main.py                # Main application (GUI + thread)
+├── requirements.txt       # Python dependencies
+├── setup.py               # Build script for py2app/pyinstaller
+├── README.md              # This file
+└── icons/                 # Custom icon (.icns)
 ```
 
 ---
 
-## 🔒 Sicherheit & Berechtigungen
+## 🔒 Security & Permissions
 
-- **Nur macOS**: Andere OS haben keine kompatiblen APIs für `Quartz`/`AppKit`.
-- **Bedienungshilfen**: Ohne diese Berechtigung verweigert macOS die Event‑Injection.
-- **Nutzung**: Verantwortungsbewusst einsetzen – Auto‑Clicker können als Bot‑Verhalten erkannt werden.
-
----
-
-## 🛠️ Geplante Verbesserungen
-
-- [ ] Bugfix: Custom‑Icon auch in kompilierter `.app` anzeigen
-- [ ] Konfigurierbarer Double‑Click Abstand
-- [ ] Unterstützung für positionsbasiertes Klicken (Koordinaten‑Ziel)
-- [ ] Verbesserte Energieeffizienz bei langen Intervallen
+- **macOS only**: No compatible APIs for other OS.
+- **Accessibility**: Without permission, macOS will block event injection.
+- **Usage**: Use responsibly – auto‑clickers may be detected as bot behaviour.
 
 ---
 
-## 🤝 Beitrag & Lizenz
+## 🛠️ Planned Improvements
 
-Beiträge, Bugreports und Pull Requests sind willkommen!  
-Bitte vor PR‑Erstellung ein Issue eröffnen.
+- [ ] Fix: Ensure custom icon appears in built `.app`
+- [ ] Configurable double‑click gap
+- [ ] Support for coordinate‑based clicking
+- [ ] Improved power efficiency for long intervals
 
-**Lizenz:** MIT (siehe [LICENSE](LICENSE))
+---
+
+## 🤝 Contributing & License
+
+Contributions, bug reports, and pull requests are welcome!  
+Please open an issue before submitting a PR.
+
+**License:** MIT (see [LICENSE](LICENSE))
 ```
-
----
-
-Wenn du magst, kann ich dir zusätzlich den **Workaround‑Abschnitt für den Icon‑Bug** so ausformulieren, dass er auch gleich die Terminal‑Befehle zum manuellen Ersetzen des `.icns` enthält – dann hätten Nutzer direkt die Lösung im README. Willst du, dass ich den noch ergänze?
