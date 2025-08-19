@@ -137,4 +137,3 @@ Contributions, bug reports, and pull requests are welcome!
 Please open an issue before submitting a PR.
 
 **License:** MIT (see [LICENSE](LICENSE))
-```
