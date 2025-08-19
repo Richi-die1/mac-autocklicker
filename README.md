@@ -24,7 +24,7 @@ Provides precise automated clicking (single or double) with configurable interva
 ## 📦 Requirements
 
 - **macOS** (must grant Accessibility access)
-- **Python 3.9+** (recommended, only for "build yourself" option)
+- **Python 3.9+** (recommended, only for the "build yourself" option)
 - Dependencies (for manual run):
   ```bash
   pip install PyQt6 pyobjc
@@ -48,11 +48,15 @@ Provides precise automated clicking (single or double) with configurable interva
 git clone https://github.com/YOURUSERNAME/mac-autoclicker.git
 cd mac-autoclicker
 
-# Install dependencies
-pip install -r requirements.txt
+# Create & activate a virtual environment
+python3 -m venv .venv
+source .venv/bin/activate
 
-# Build the .app using py2app or pyinstaller
-python setup.py py2app  # or: pyinstaller main.py --onefile --windowed
+# Install PyInstaller
+pip install pyinstaller
+
+# Build the app
+pyinstaller --windowed --onefile --name "Mac Autoclicker" autoclicker.py
 ```
 
 > ⚠️ **Known Bug:** When building, the resulting `.app` currently shows the default Python 2 icon instead of the custom icon.  
@@ -101,11 +105,11 @@ python setup.py py2app  # or: pyinstaller main.py --onefile --windowed
 
 ```
 mac-autoclicker/
-├── main.py                # Main application (GUI + thread)
-├── requirements.txt       # Python dependencies
-├── setup.py               # Build script for py2app/pyinstaller
-├── README.md              # This file
-└── icons/                 # Custom icon (.icns)
+├── autoclicker.py          # Main application (GUI + thread)
+├── requirements.txt        # Python dependencies
+├── setup.py                # Optional build script
+├── README.md               # This file
+└── icons/                  # Custom icon (.icns)
 ```
 
 ---
